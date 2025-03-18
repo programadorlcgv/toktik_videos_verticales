@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toktik/domain/entities/video_post.dart';
+import 'package:toktik/presentation/widgets/shared/video_bottons.dart';
+import 'package:toktik/shared/data/local_video_post.dart';
 
 class VideoScrollableView extends StatelessWidget {
 
@@ -12,16 +14,48 @@ class VideoScrollableView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
+    return PageView.builder(
       scrollDirection: Axis.vertical,
       physics: BouncingScrollPhysics(),
-      children: [
-        Container (color: Colors.red,),
-        Container (color: Colors.blue,),
-        Container (color: Colors.teal,),
-        Container (color: Colors.yellow,),
-        Container (color: Colors.pink,),
+      itemCount: videos.length,
+      itemBuilder: (context, index) {
+        final VideoPost videoPost = videos[index];
 
+        return Stack(
+          children: [
+            //videos Player + gradiente
+
+            // Botones
+            Positioned(
+              bottom: 40,
+              right: 20,
+              child: VideoBottons(video: videoPost)
+            ),
+          ],
+        );
+     },
+    );
+  }
+}
+
+class _CustomIconButton extends StatelessWidget {
+
+  final int value;
+  final IconData icon;
+  final Color color;
+
+  const _CustomIconButton({
+    required this.value, 
+    required this.icon, 
+    required this.color
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        IconButton(onPressed: () {}, icon: Icon(Icons.favorite, color: Colors.red,)),
+        Text("$value")
       ],
     );
   }
