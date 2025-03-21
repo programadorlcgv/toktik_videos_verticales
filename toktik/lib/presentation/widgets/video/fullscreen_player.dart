@@ -67,7 +67,7 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
 
                 VideoBackground(stops: const [0.8, 1.0],),
 
-                //Texto
+                //Texto 
                 Positioned(
                   bottom: 50,
                   left: 20,
